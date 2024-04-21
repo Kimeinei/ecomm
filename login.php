@@ -44,7 +44,7 @@
                     {
                         $_SESSION['username'] = $row['username'];
                         $_SESSION['id'] = $row['id'];
-                        header("location: home.php");
+                        header("location: home.html");
                         exit();
                     }else
                     {
