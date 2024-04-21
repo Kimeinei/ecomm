@@ -16,7 +16,7 @@
         <li><a href="#">HOME</a></li>
         <li><a href="#">PRODUCTS</a></li>
         <li><a href="#">CART</a></li>
-        <li><a href="#">LOGIN</a></li>
+        <li><a href="logout.php">LOGOUT</a></li>
       </ul>
     </nav>
     <div class="search-bar">
