@@ -202,7 +202,7 @@ section{
    align-items: center;
    justify-content: center;
    min-height: 100vh;
-   background: url(../image/login-bg.jpg) no-repeat;
+   background: url(../image/login.png) no-repeat;
    background-position: center;
    background-size: cover;
    overflow-x: hidden;
@@ -546,7 +546,11 @@ section{
    text-align: center;
    position: relative;
 }
-
+.products .box-container .box p{
+   margin-bottom: 1rem;
+   font-size: 2rem;
+   color:var(--black);
+}
 .products .box-container .box .image{
    height: 35rem;
    width: 100%;
@@ -591,7 +595,7 @@ section{
 }
 
 .products .box-container .box .qty{
-   width: 100%;
+   width: 25%;
    padding:1.2rem 1.4rem;
    font-size: 1.8rem;
    color:var(--black);
@@ -1121,6 +1125,11 @@ z-index:2
    box-shadow: var(--box-shadow);
    border-radius: .5rem;
    position: relative;
+}
+.shopping-cart .box-container .box form p{
+   margin-bottom: 1rem;
+   font-size: 2rem;
+   color:var(--light-color);
 }
 
 .shopping-cart .box-container .box .image{

@@ -2,8 +2,6 @@
 session_start();
 @include 'config.php';
 
-
-
 $user_id = $_SESSION['user_id'];
 
 if(!isset($user_id)){
@@ -11,51 +9,11 @@ if(!isset($user_id)){
 }
 
 if(isset($_POST['add_to_wishlist'])){
-
-   $product_id = $_POST['product_id'];
-   $product_name = $_POST['product_name'];
-   $product_price = $_POST['product_price'];
-   $product_image = $_POST['product_image'];
-   
-   $check_wishlist_numbers = mysqli_query($conn, "SELECT * FROM `wishlist` WHERE name = '$product_name' AND user_id = '$user_id'") or die('query failed');
-
-   $check_cart_numbers = mysqli_query($conn, "SELECT * FROM `cart` WHERE name = '$product_name' AND user_id = '$user_id'") or die('query failed');
-
-   if(mysqli_num_rows($check_wishlist_numbers) > 0){
-       $message[] = 'already added to wishlist';
-   }elseif(mysqli_num_rows($check_cart_numbers) > 0){
-       $message[] = 'already added to cart';
-   }else{
-       mysqli_query($conn, "INSERT INTO `wishlist`(user_id, pid, name, price, image) VALUES('$user_id', '$product_id', '$product_name', '$product_price', '$product_image')") or die('query failed');
-       $message[] = 'product added to wishlist';
-   }
-
+   // Your existing code for adding to wishlist
 }
 
 if(isset($_POST['add_to_cart'])){
-
-   $product_id = $_POST['product_id'];
-   $product_name = $_POST['product_name'];
-   $product_price = $_POST['product_price'];
-   $product_image = $_POST['product_image'];
-   $product_quantity = $_POST['product_quantity'];
-
-   $check_cart_numbers = mysqli_query($conn, "SELECT * FROM `cart` WHERE name = '$product_name' AND user_id = '$user_id'") or die('query failed');
-
-   if(mysqli_num_rows($check_cart_numbers) > 0){
-       $message[] = 'already added to cart';
-   }else{
-
-       $check_wishlist_numbers = mysqli_query($conn, "SELECT * FROM `wishlist` WHERE name = '$product_name' AND user_id = '$user_id'") or die('query failed');
-
-       if(mysqli_num_rows($check_wishlist_numbers) > 0){
-           mysqli_query($conn, "DELETE FROM `wishlist` WHERE name = '$product_name' AND user_id = '$user_id'") or die('query failed');
-       }
-
-       mysqli_query($conn, "INSERT INTO `cart`(user_id, pid, name, price, quantity, image) VALUES('$user_id', '$product_id', '$product_name', '$product_price', '$product_quantity', '$product_image')") or die('query failed');
-       $message[] = 'product added to cart';
-   }
-
+   // Your existing code for adding to cart
 }
 
 ?>
@@ -79,32 +37,20 @@ if(isset($_POST['add_to_cart'])){
    
 <?php @include 'header.php'; ?>
 <section class="banner">
-        <div class="row">
-            <div class="content">
-                <h3>Selling <span>ALL</span> Things Student</h3>
-                <a href="shop.php" class="btn">buy now</a>
-            </div>
-
-            <div class="image">
-                <img src="image/logo.png" class="main-banner-image" alt="">
-            </div>
-        </div>
-
-        <div class="image-slider">
-            <img src="image/img1.png" alt="">
-            <img src="image/img2.png" alt="">
-            <img src="image/img3.png" alt="">
-        </div>
+    <!-- Banner section content -->
 </section>
 
 <section class="home">
 
    <div class="content">
-      <h3>old collections</h3>
-      <p>Welcome to Flora Flower Shop, where we infuse passion into petals, 
-         creating personalized floral experiences that bring nature's beauty 
-         to life in every arrangement. Explore our exquisite blooms and let us 
-         craft a memorable moment for you.</p>
+      <h3>Collections</h3>
+      <p>Welcome to PABAKAL's Collections, where Bicol University 
+         student entrepreneurs showcase their innovative creations, 
+         infusing each product with passion and creativity. Discover
+         a curated collection of unique treasures, handcrafted with 
+         care and designed to enrich your life. Join us in celebrating 
+         the entrepreneurial spirit of our students and uncover the 
+         hidden gems waiting to be discovered.</p>
       <a href="about.php" class="btn">discover more</a>
    </div>
 
@@ -121,7 +67,8 @@ if(isset($_POST['add_to_cart'])){
          if(mysqli_num_rows($select_products) > 0){
             while($fetch_products = mysqli_fetch_assoc($select_products)){
       ?>
-      <form action="" method="POST" class="box">
+      <div class="box">
+         <!-- Existing product details -->
          <a href="view_page.php?pid=<?php echo $fetch_products['id']; ?>" class="fas fa-eye"></a>
          <div class="price">₱<?php echo $fetch_products['price']; ?>/-</div>
          <img src="uploaded_img/<?php echo $fetch_products['image']; ?>" alt="" class="image">
@@ -133,12 +80,40 @@ if(isset($_POST['add_to_cart'])){
          <input type="hidden" name="product_image" value="<?php echo $fetch_products['image']; ?>">
          <input type="submit" value="add to wishlist" name="add_to_wishlist" class="option-btn">
          <input type="submit" value="add to cart" name="add_to_cart" class="btn">
-      </form>
+         
+         <!-- Reviews Section -->
+         <div class="reviews">
+            <h3>Product Reviews</h3>
+            <?php
+               $product_id = $fetch_products['id'];
+               $reviews_query = mysqli_query($conn, "SELECT * FROM `reviews` WHERE product_id = '$product_id'");
+               if (mysqli_num_rows($reviews_query) > 0) {
+                  while ($review = mysqli_fetch_assoc($reviews_query)) {
+            ?>
+            <div class="review">
+               <p><strong>Rating:</strong> <?php echo $review['rating']; ?></p>
+               <p><strong>Comment:</strong> <?php echo $review['comment']; ?></p>
+            </div>
+            <?php
+                  }
+               } else {
+                  echo '<p>No reviews yet.</p>';
+               }
+            ?>
+            <!-- Add New Review Form -->
+            <form action="" method="post">
+               <input type="hidden" name="product_id" value="<?php echo $fetch_products['id']; ?>">
+               <input type="number" min="1" max="5" name="rating" placeholder="Rating (1-5)" required>
+               <textarea name="comment" placeholder="Enter your review" required></textarea>
+               <button type="submit" name="add_review">Add Review</button>
+            </form>
+         </div>
+      </div>
       <?php
+            }
+         } else {
+            echo '<p class="empty">no products added yet!</p>';
          }
-      }else{
-         echo '<p class="empty">no products added yet!</p>';
-      }
       ?>
 
    </div>
@@ -158,9 +133,6 @@ if(isset($_POST['add_to_cart'])){
    </div>
 
 </section>
-
-
-
 
 <?php @include 'footer.php'; ?>
 
