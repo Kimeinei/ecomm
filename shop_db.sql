@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 13, 2024 at 02:33 PM
+-- Generation Time: May 13, 2024 at 05:02 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -42,11 +42,7 @@ CREATE TABLE `cart` (
 --
 
 INSERT INTO `cart` (`id`, `user_id`, `pid`, `name`, `price`, `quantity`, `image`) VALUES
-(129, 14, 16, 'lavendor rose', 13, 1, 'lavendor rose.jpg'),
-(131, 14, 15, 'cottage rose', 15, 1, 'cottage rose.jpg'),
-(133, 15, 15, 'cottage rose', 15, 1, 'cottage rose.jpg'),
-(134, 15, 16, 'lavendor rose', 13, 3, 'lavendor rose.jpg'),
-(145, 23, 16, 'Fresh Sunflowers', 2800, 3, 'freshsunflower.png');
+(146, 24, 29, 'Polvoron', 125, 1, 'Polvoron 5pcs. Php125.png');
 
 -- --------------------------------------------------------
 
@@ -102,16 +98,12 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `name`, `details`, `price`, `image`) VALUES
-(15, 'Dried Flowers - Roses', 'Description:\r\nDried roses, with their preserved beauty, serve as timeless tokens of love and sentimentality, bringing a touch of everlasting elegance to gift and crafting projects.', 2850, 'dryroses.png'),
-(16, 'Fresh Sunflowers', 'Description:\r\nRadiates warmth and positivity, embodying the spirit of joy and representing the sun\'s cheerful energy, making it a delightful and vibrant gift for various occasions.', 2800, 'freshsunflower.png'),
-(17, 'Fresh Lily', 'Description:\r\n enchants with its graceful blooms and captivating fragrance, symbolizing purity, renewal, and the radiant beauty that lilies bring to any momentous celebration or heartfelt gesture.', 1999, 'lily.png'),
-(22, 'Bag with Flowers', 'Bag with flowers. Fitting for any occasions', 2500, 'bagwflower.png'),
-(23, 'flower1', 'a', 1000, 'bluedry.png'),
-(24, 'White rose', 'a', 1000, 'white_roses.png'),
-(25, 'rose - pink', 'a', 1000, 'roses1.png'),
-(26, 'rainbow', 'a', 1000, 'dryflower1.png'),
-(27, 'lily1', 'a', 1000, 'lily1.png'),
-(28, 'money flower', 'a', 4999, 'money4.png');
+(29, 'Polvoron', 'Enjoy the traditional goodness of 5 delectable polvoron pieces. Crafted with fine flour, powdered milk, sugar, and butter, each crumbly treat melts in your mouth for a delightful indulgence.', 125, 'Polvoron 5pcs. Php125.png'),
+(30, 'Malunggay Chips', 'Crispy, golden malunggay chips in a convenient 50g pack. Perfectly sliced and fried for a burst of natural sweetness on-the-go.', 250, 'Malunggay chips 50g Php250.png'),
+(31, 'Keychain Jujutsu Kaisen', 'Elevate your style with our small JJK anime keychain. Perfect for fans, it adds a touch of anime flair to your keys or bag.', 36, 'keychain jjk Php36.png'),
+(32, 'Banana Chips', 'Crispy, golden banana chips in a convenient 50g pack. Perfectly sliced and fried for a burst of natural sweetness on-the-go.', 250, 'Banana chips.png'),
+(33, 'Anime Cup', 'Standard glazed ceramic, anime print, \"Eat, Sleep, Anime, Repeat\"', 699, 'anime_cup.jpg'),
+(34, 'Luffy Sticker', '2 inch One Piece Luffy sticker', 12, 'luffy_sticker.jpg');
 
 -- --------------------------------------------------------
 
@@ -141,7 +133,8 @@ INSERT INTO `users` (`id`, `name`, `email`, `password`, `user_type`) VALUES
 (20, 'Saive', 'hehehe4@gmail.com', '6512bd43d9caa6e02c990b0a82652dca', 'admin'),
 (21, 'qwer', 'qwer1@gmail.com', '6512bd43d9caa6e02c990b0a82652dca', 'user'),
 (22, 'test', 'testy@gmail.com', '698d51a19d8a121ce581499d7b701668', 'admin'),
-(23, 'Kimi', 'kimi@czar.com', 'd8578edf8458ce06fbc5bb76a58c5ca4', 'admin');
+(23, 'Kimi', 'kimi@czar.com', 'd8578edf8458ce06fbc5bb76a58c5ca4', 'seller'),
+(24, 'qwerty', 'qwerty@wasd.com', 'd8578edf8458ce06fbc5bb76a58c5ca4', 'user');
 
 -- --------------------------------------------------------
 
@@ -157,6 +150,13 @@ CREATE TABLE `wishlist` (
   `price` int(100) NOT NULL,
   `image` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `wishlist`
+--
+
+INSERT INTO `wishlist` (`id`, `user_id`, `pid`, `name`, `price`, `image`) VALUES
+(69, 24, 30, 'Malunggay Chips', 1, 'Malunggay chips 50g Php250.png');
 
 --
 -- Indexes for dumped tables
@@ -206,7 +206,7 @@ ALTER TABLE `wishlist`
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=146;
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=147;
 
 --
 -- AUTO_INCREMENT for table `message`
@@ -224,19 +224,19 @@ ALTER TABLE `orders`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `wishlist`
 --
 ALTER TABLE `wishlist`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
